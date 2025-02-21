@@ -1,7 +1,9 @@
-import { createGlobalStyle } from "styled-components";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 
 import Router from "./Router";
+import { useDispatch, useSelector } from "react-redux";
+import { darkTheme, lightTheme } from "./theme";
+import { toggleDarkMode } from "./reducers";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -65,12 +67,42 @@ a {
 }
 `;
 
+const DarkModeBtn = styled.button<{ $isDark: boolean }>`
+  position: sticky;
+  width: 50px;
+  height: 50px;
+  left: 50px;
+  top: 50px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0, 0, 0, 0);
+  color: ${(props) => (props.$isDark ? "white" : "black")};
+  border: none;
+`;
+
 function App() {
+  const dispatch = useDispatch();
+  const isDark = useSelector(
+    (state: { isDarkMode: boolean }) => state.isDarkMode
+  );
+
+  const onClickDarkModeToggle = () => {
+    dispatch(toggleDarkMode());
+  };
+
+  const theme = isDark ? darkTheme : lightTheme;
   return (
     <>
-      <GlobalStyle />
-      <Router />
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <DarkModeBtn onClick={onClickDarkModeToggle} $isDark={isDark}>
+          {isDark ? "Light" : "Dark"}
+        </DarkModeBtn>
+
+        <Router />
+      </ThemeProvider>
     </>
   );
 }

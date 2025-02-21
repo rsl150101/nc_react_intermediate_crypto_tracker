@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ThemeProvider } from "styled-components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import App from "./App";
-import { theme } from "./theme";
+import { Provider } from "react-redux";
+import makeStore from "./store/configureStore";
 
 const queryClient = new QueryClient();
 
@@ -14,9 +14,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
+      <Provider store={makeStore}>
         <App />
-      </ThemeProvider>
+      </Provider>
     </QueryClientProvider>
   </React.StrictMode>
 );
