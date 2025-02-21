@@ -48,7 +48,6 @@ function Price() {
   const { USD } = useOutletContext<priceInfoContext>();
   const athDate = new Date(USD.ath_date).toLocaleString("en-US");
 
-  console.log(USD);
   return (
     <div>
       <Overview>
