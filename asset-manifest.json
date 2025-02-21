@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/nc_react_intermediate_crypto_tracker/static/js/main.e175de28.js",
+    "main.js": "/nc_react_intermediate_crypto_tracker/static/js/main.313050c3.js",
     "index.html": "/nc_react_intermediate_crypto_tracker/index.html",
-    "main.e175de28.js.map": "/nc_react_intermediate_crypto_tracker/static/js/main.e175de28.js.map"
+    "main.313050c3.js.map": "/nc_react_intermediate_crypto_tracker/static/js/main.313050c3.js.map"
   },
   "entrypoints": [
-    "static/js/main.e175de28.js"
+    "static/js/main.313050c3.js"
   ]
 }
