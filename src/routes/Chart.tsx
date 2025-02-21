@@ -19,6 +19,11 @@ interface ChartContext {
   coinId: string;
 }
 
+interface ICandle {
+  x: number;
+  y: number[];
+}
+
 function Chart() {
   const { coinId } = useOutletContext<ChartContext>();
   const { isLoading, data } = useQuery<IHistorical[]>({
@@ -32,11 +37,14 @@ function Chart() {
         "Loading chart..."
       ) : (
         <ReactApexChart
-          type="line"
+          type="candlestick"
           series={[
             {
               name: "Price",
-              data: data?.map((price) => price.close) as number[],
+              data: data?.map((price) => ({
+                x: price.time_close,
+                y: [price.open, price.high, price.low, price.close],
+              })) as ICandle[],
             },
           ]}
           options={{
@@ -47,7 +55,6 @@ function Chart() {
               background: "transparent",
             },
             theme: { mode: "dark" },
-            stroke: { curve: "smooth", width: 4 },
             grid: {
               show: false,
             },
@@ -63,11 +70,6 @@ function Chart() {
             yaxis: {
               show: false,
             },
-            fill: {
-              type: "gradient",
-              gradient: { gradientToColors: ["blue"], stops: [0, 100] },
-            },
-            colors: ["red"],
             tooltip: {
               y: {
                 formatter: (value) => `$${value.toFixed(2)}`,
