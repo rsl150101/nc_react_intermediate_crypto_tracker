@@ -17,10 +17,18 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
+  position: relative;
   height: 15vh;
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const HomeBtn = styled.div`
+  left: 40px;
+  position: absolute;
+  font-size: 30px;
+  color: ${(props) => props.theme.accentColor};
 `;
 
 const Title = styled.h1`
@@ -163,6 +171,9 @@ function Coin() {
   return (
     <Container>
       <Header>
+        <HomeBtn>
+          <Link to="/">&larr;</Link>
+        </HomeBtn>
         <Title>{state ? state : loading ? "Loading..." : infoData?.name}</Title>
       </Header>
       {loading ? (
